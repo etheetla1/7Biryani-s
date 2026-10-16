@@ -1,0 +1,155 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Setting {
+  id                   String @id @default("default")
+  brandName            String @default("7 Biryani")
+  legalName            String @default("Indian Food Ridgewood LLC")
+  addressLine1         String @default("16-18 S Broad St")
+  city                 String @default("Ridgewood")
+  state                String @default("NJ")
+  zip                  String @default("07450")
+  phone                String @default("")
+  timezone             String @default("America/New_York")
+  taxBps               Int    @default(6625)
+  trayOrderByHour      Int    @default(17)
+  trayLeadDays         Int    @default(1)
+  pickupCutoffMinutes  Int    @default(45)
+  fulfillment          String @default("pickup_only")
+  kitchenEmail         String @default("")
+}
+
+model WeeklyHour {
+  id       String  @id
+  weekday  Int     @unique
+  openMin  Int?
+  closeMin Int?
+}
+
+model ClosureDate {
+  id     String  @id @default(cuid())
+  date   String  @unique
+  reason String?
+}
+
+model Flavor {
+  id         String  @id
+  name       String
+  sortOrder  Int
+  available  Boolean @default(true)
+  skus       Sku[]
+}
+
+model Size {
+  id        String @id
+  label     String
+  serves    String
+  sortOrder Int
+  skus      Sku[]
+}
+
+model Sku {
+  id           String  @id
+  flavorId     String
+  sizeId       String
+  priceCents   Int
+  available    Boolean @default(true)
+  sortOrder    Int
+  description  String
+  allergenNote String
+  imageId      String
+  flavor       Flavor  @relation(fields: [flavorId], references: [id])
+  size         Size    @relation(fields: [sizeId], references: [id])
+  audits       PriceAudit[]
+  items        OrderItem[]
+
+  @@unique([flavorId, sizeId])
+}
+
+model PriceAudit {
+  id        String   @id @default(cuid())
+  actor     String
+  skuId     String
+  oldCents  Int
+  newCents  Int
+  createdAt DateTime @default(now())
+  sku       Sku      @relation(fields: [skuId], references: [id])
+}
+
+model Customer {
+  id        String   @id @default(cuid())
+  phoneE164 String   @unique
+  name      String
+  email     String?
+  createdAt DateTime @default(now())
+  orders    Order[]
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  customerId      String
+  visitorId       String?
+  status          String      @default("received")
+  paymentStatus   String      @default("pending")
+  stripeSessionId String?
+  subtotalCents   Int
+  taxCents        Int
+  totalCents      Int
+  pickupAt        DateTime
+  note            String?
+  createdAt       DateTime    @default(now())
+  customer        Customer    @relation(fields: [customerId], references: [id])
+  items           OrderItem[]
+}
+
+model OrderItem {
+  id             String @id @default(cuid())
+  orderId        String
+  skuId          String
+  flavorName     String
+  sizeLabel      String
+  qty            Int
+  unitPriceCents Int
+  order          Order  @relation(fields: [orderId], references: [id])
+  sku            Sku    @relation(fields: [skuId], references: [id])
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  visitorId   String
+  type        String
+  itemId      String?
+  sizeId      String?
+  path        String?
+  referrer    String?
+  utmSource   String?
+  utmMedium   String?
+  utmCampaign String?
+  createdAt   DateTime @default(now())
+}
+
+model AdminUser {
+  id           String @id @default(cuid())
+  email        String @unique
+  passwordHash String
+}
+
+model Review {
+  id               String   @id @default(cuid())
+  firstName        String
+  lastName         String?
+  email            String
+  biryaniId        String
+  rating           Int
+  body             String
+  photoUrl         String?
+  consentToPublish Boolean
+  status           String   @default("pending")
+  createdAt        DateTime @default(now())
+}

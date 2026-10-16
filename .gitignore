@@ -1,0 +1,11 @@
+.env
+.env.local
+.env.*.local
+web/node_modules
+web/.next
+web/prisma/*.db
+web/prisma/*.db-journal
+**/*.db
+.DS_Store
+web/public/reviews/*
+!web/public/reviews/.gitkeep

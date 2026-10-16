@@ -1,0 +1,29 @@
+:root {
+  --ivory: #f6f0e6;
+  --ivory-2: #efe6d6;
+  --paper: #fffaf2;
+  --night: #14110e;
+  --night-2: #1c1713;
+  --saffron: #c8891a;
+  --saffron-dim: #a36e12;
+  --copper: #b45a32;
+  --copper-2: #8a4a24;
+  --cream: #f6f0e6;
+  --cream-dim: #6f6558;
+  --muted: #8a7f70;
+  --ink: #1a120c;
+  --danger: #a33d32;
+  --ok: #5c7a45;
+  --line: rgba(26, 18, 12, 0.12);
+  --line-strong: rgba(26, 18, 12, 0.22);
+  --display: "Fraunces", "Times New Roman", serif;
+  --text: "Figtree", "Helvetica Neue", sans-serif;
+  --radius: 1.1rem;
+  --shadow: 0 18px 50px rgba(26, 18, 12, 0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion: 0s;
+  }
+}

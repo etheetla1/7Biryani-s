@@ -1,0 +1,58 @@
+{
+  "brand": "7-briyani",
+  "domain": "indianfoodridgewood.com",
+  "legacyDomain": "indianfoodridgewoodllc.com",
+  "source": "Owner flyers 2026-09-30",
+  "assumptions": [
+    "24 oz prices come from the individual-bowl flyer. Do not label them specials on the site.",
+    "Item names use Biryani. Brand name is 7 Biryani."
+  ],
+  "policies": {
+    "halal": true,
+    "halalCopy": "We serve halal meat only",
+    "fullTrayServes": "19–24 people",
+    "halfTrayServes": "7–9 people"
+  },
+  "sizes": [
+    { "id": "24oz", "label": "24 oz", "serves": "1" },
+    { "id": "half_tray", "label": "Half tray", "serves": "7–9 people", "flyer": "Biryani Half Tray Menu" },
+    { "id": "full_tray", "label": "Full tray", "serves": "19–24 people", "flyer": "Briyani Full Tray Menu" }
+  ],
+  "flavors": [
+    {
+      "id": "chicken",
+      "name": "Chicken Biryani",
+      "prices": { "24oz": 12.99, "half_tray": 80, "full_tray": 160 }
+    },
+    {
+      "id": "paneer",
+      "name": "Paneer Biryani",
+      "prices": { "24oz": 12.99, "half_tray": 75, "full_tray": 130 }
+    },
+    {
+      "id": "veg",
+      "name": "Veg Biryani",
+      "prices": { "24oz": 11.99, "half_tray": 75, "full_tray": 120 }
+    },
+    {
+      "id": "goat",
+      "name": "Goat Biryani",
+      "prices": { "24oz": 15.99, "half_tray": 90, "full_tray": 180 }
+    },
+    {
+      "id": "shrimp",
+      "name": "Shrimp Biryani",
+      "prices": { "24oz": 14.99, "half_tray": 90, "full_tray": 180 }
+    },
+    {
+      "id": "beef",
+      "name": "Beef Biryani",
+      "prices": { "24oz": 14.99, "half_tray": 75, "full_tray": 150 }
+    },
+    {
+      "id": "lamb",
+      "name": "Lamb Biryani",
+      "prices": { "24oz": 15.99, "half_tray": 90, "full_tray": 180 }
+    }
+  ]
+}
